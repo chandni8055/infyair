@@ -1,0 +1,52 @@
+@startuml
+skinparam actorStyle awesome
+
+skinparam usecase {
+BackgroundColor DarkSeaGreen
+BorderColor DarkSlateGray
+
+BackgroundColor<< auth >> red
+BorderColor<< auth >> red
+
+ArrowColor Olive
+ActorBorderColor black
+ActorFontName Courier
+
+ActorBackgroundColor<< Human >> Gold
+}
+
+left to right direction
+
+actor "Un-registered customer" as uc
+actor "registered customer" as rc
+actor "admin" as admin
+
+rectangle "Airline Reservation System" {
+  usecase "Register" as register
+  usecase "Login" as login
+  usecase "Inquire" as inquire
+  usecase "Book Ticket" as book <<auth>>
+  usecase "Make Payment" as payment <<auth>>
+  usecase "View Ticket" as view <<auth>>
+  usecase "View All Ticket" as viewall <<auth>>
+  usecase "Cancel Ticket" as cancel <<auth>>
+  usecase "add flight" as addflight
+  usecase "update flight" as updateflight
+}
+
+
+
+uc --> register
+uc --> inquire
+
+rc --> login
+rc --> inquire
+rc --> book
+rc --> payment
+rc --> view
+rc --> viewall
+rc --> cancel
+
+admin --> addflight
+admin --> updateflight
+@enduml
