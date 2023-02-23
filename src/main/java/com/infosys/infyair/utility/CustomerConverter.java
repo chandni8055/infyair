@@ -1,13 +1,13 @@
 package com.infosys.infyair.utility;
 
-import com.infosys.infyair.Entity.CustomerEntity;
+import com.infosys.infyair.entity.CustomerEntity;
 import com.infosys.infyair.dto.CustomerDTO;
 
 public class CustomerConverter {
 
     public static CustomerDTO toDto(CustomerEntity customerEntity){
         CustomerDTO customerDTO = new CustomerDTO();
-        if(null != customerDTO.getCustomerId()) {
+        if(null != customerEntity.getId()) {
             customerDTO.setCustomerId(customerEntity.getId());
         }
 
@@ -18,8 +18,6 @@ public class CustomerConverter {
         customerDTO.setMobile(customerEntity.getMobile());
         customerDTO.setCity(customerEntity.getCity());
         customerDTO.setEmail(customerEntity.getEmail());
-        customerDTO.setPassword(customerEntity.getPass());
-        customerDTO.setToken(customerEntity.getToken());
 
         return customerDTO;
     }
@@ -36,7 +34,6 @@ public class CustomerConverter {
         customerEntity.setCity(customerDTO.getCity());
         customerEntity.setEmail(customerDTO.getEmail());
         customerEntity.setPass(customerDTO.getPassword());
-        customerEntity.setToken(customerDTO.getToken());
 
         return customerEntity;
     }

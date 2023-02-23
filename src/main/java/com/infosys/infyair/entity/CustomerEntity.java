@@ -1,4 +1,4 @@
-package com.infosys.infyair.Entity;
+package com.infosys.infyair.entity;
 
 import jakarta.persistence.*;
 
@@ -16,7 +16,6 @@ public class CustomerEntity {
     private Long mobile;
     private String email;
     private String pass;
-    private  String token;
 
     public Integer getId() {
         return id;
@@ -88,13 +87,5 @@ public class CustomerEntity {
 
     public void setPass(String pass) {
         this.pass = pass;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 }

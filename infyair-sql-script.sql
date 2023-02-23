@@ -17,10 +17,9 @@ last_name varchar(50),
 age integer,
 gender char,
 city varchar(50),
-mobile varchar(13),
-email varchar(50),
-pass varchar(50),
-token varchar(32));
+mobile varchar(13) unique,
+email varchar(50) unique,
+pass varchar(50));
 
 create table flight(
 id integer auto_increment primary key,
@@ -31,7 +30,6 @@ source varchar(50),
 destination varchar(50),
 duration integer,
 price integer,
-pnr varchar(6),
 available_seat varchar(32));
 
 create table payment(
@@ -46,6 +44,7 @@ customer_id integer NOT NULL,
 payment_id integer NULL,
 booking_time timestamp,
 number_of_seat integer,
+pnr varchar(6),
 CONSTRAINT fk_booking_flight FOREIGN KEY (flight_id) REFERENCES flight(id),
 CONSTRAINT fk_booking_customer FOREIGN KEY (customer_id) REFERENCES customer(id),
 CONSTRAINT fk_booking_payment FOREIGN KEY (payment_id) REFERENCES payment(id));
