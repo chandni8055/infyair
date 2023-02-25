@@ -59,12 +59,11 @@ gender char,
 mobile varchar(50),
 CONSTRAINT fk_passenger_customer FOREIGN KEY (customer_id) REFERENCES customer(id));
 
-create table booking_passenger(
-booking_id integer NOT NULL references booking(id),
-passenger_id integer NOT NULL references passenger(id),
-meal_type varchar(10),
-CONSTRAINT fk_booking FOREIGN KEY (booking_id) REFERENCES booking(id),
-CONSTRAINT fk_passenger FOREIGN KEY (passenger_id) REFERENCES passenger(id));
+create table booking_passengers(
+booking_entity_id integer NOT NULL references booking(id),
+passengers_id integer NOT NULL references passenger(id));
 
+alter table booking_passengers add CONSTRAINT fk_booking FOREIGN KEY (booking_entity_id) REFERENCES booking(id);
+alter table booking_passengers add CONSTRAINT fk_passenger FOREIGN KEY (passengers_id) REFERENCES passenger(id);
 alter table payment add CONSTRAINT fk_payment_booking FOREIGN KEY (booking_id) REFERENCES booking(id);
 commit;

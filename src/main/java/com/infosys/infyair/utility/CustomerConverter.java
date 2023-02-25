@@ -8,7 +8,7 @@ public class CustomerConverter {
     public static CustomerDTO toDto(CustomerEntity customerEntity){
         CustomerDTO customerDTO = new CustomerDTO();
         if(null != customerEntity.getId()) {
-            customerDTO.setCustomerId(customerEntity.getId());
+            customerDTO.setId(customerEntity.getId());
         }
 
         customerDTO.setFirstName(customerEntity.getFirstName());
@@ -25,7 +25,7 @@ public class CustomerConverter {
     public static CustomerEntity toEntity(CustomerDTO customerDTO){
         CustomerEntity customerEntity = new CustomerEntity();
 
-        customerEntity.setId(customerDTO.getCustomerId());
+        customerEntity.setId(customerDTO.getId());
         customerEntity.setFirstName(customerDTO.getFirstName());
         customerEntity.setLastName(customerDTO.getLastName());
         customerEntity.setAge(customerDTO.getAge());

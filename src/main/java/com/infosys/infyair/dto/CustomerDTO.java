@@ -1,7 +1,7 @@
 package com.infosys.infyair.dto;
 
 public class CustomerDTO {
-    private Integer customerId;
+    private Integer id;
     private String firstName;
     private String lastName;
     private Integer age;
@@ -10,14 +10,13 @@ public class CustomerDTO {
     private String city;
     private String email;
     private String password;
-    private  String token;
 
-    public Integer getCustomerId() {
-        return customerId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -83,13 +82,5 @@ public class CustomerDTO {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 }

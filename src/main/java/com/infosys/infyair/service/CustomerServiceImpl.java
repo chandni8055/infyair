@@ -33,18 +33,4 @@ public class CustomerServiceImpl implements CustomerService{
         }
         throw new InvalidUserException("Username and password don't match");
     }
-
-
-
-
-    /*public boolean login(LoginDTO loginDTO) {
-        Boolean flag=false;
-        logger.info("Login request for customer {} with password {}", loginDTO.getPhoneNo(),loginDTO.getPassword());
-        Optional<Customer> cust;
-        cust=custRepo.findById(loginDTO.getPhoneNo());
-        if(cust.isPresent() && cust.get() != null && cust.get().getPassword().equals(loginDTO.getPassword())) {
-            flag= true;
-        }
-        return flag;
-    }*/
 }
