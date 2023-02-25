@@ -1,12 +1,13 @@
 package com.infosys.infyair.dto;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class FlightDTO {
     private Integer id;
     private String company;
     private String flightNumber;
-    private Timestamp doj;
+    private LocalDateTime doj;
     private String source;
     private String destination;
     private Integer duration;
@@ -37,11 +38,11 @@ public class FlightDTO {
         this.flightNumber = flightNumber;
     }
 
-    public Timestamp getDoj() {
+    public LocalDateTime getDoj() {
         return doj;
     }
 
-    public void setDoj(Timestamp doj) {
+    public void setDoj(LocalDateTime doj) {
         this.doj = doj;
     }
 

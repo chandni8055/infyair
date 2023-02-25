@@ -3,6 +3,7 @@ package com.infosys.infyair.entity;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "flight")
@@ -13,7 +14,7 @@ public class FlightEntity {
     private Integer id;
     private String company;
     private String flightNumber;
-    private Timestamp doj;
+    private LocalDateTime doj;
     private String source;
     private String destination;
     private Integer duration;
@@ -44,11 +45,11 @@ public class FlightEntity {
         this.flightNumber = flightNumber;
     }
 
-    public Timestamp getDoj() {
+    public LocalDateTime getDoj() {
         return doj;
     }
 
-    public void setDoj(Timestamp doj) {
+    public void setDoj(LocalDateTime doj) {
         this.doj = doj;
     }
 
