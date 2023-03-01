@@ -30,11 +30,11 @@ public class BookingServiceImpl implements BookingService{
     @Autowired
     private FlightRepository flightRepository;
     @Override
-    public BookingDTO addBooking(Long mobile, String password, BookingDTO bookingDTO) throws InvalidUserException, InfyAirException {
+    public BookingDTO addBooking(Long mobile, String password, Integer customerId, BookingDTO bookingDTO) throws InvalidUserException, InfyAirException {
 
         customerService.checkLogin(mobile, password);
 
-        Optional<CustomerEntity> optionalCustomerEntity = customerRepository.findById(bookingDTO.getCustomerId());
+        Optional<CustomerEntity> optionalCustomerEntity = customerRepository.findById(customerId);
         if(optionalCustomerEntity.isEmpty()) {
             throw new InfyAirException("User does not exist");
         }
@@ -68,5 +68,62 @@ public class BookingServiceImpl implements BookingService{
 
         return bookingDTO;
 
+    }
+
+    @Override
+    public List<BookingDTO> getBookingDetails(Long mobile, String password, Integer customerId) throws InvalidUserException, InfyAirException {
+        customerService.checkLogin(mobile, password);
+
+        Optional<CustomerEntity> optionalCustomerEntity = customerRepository.findById(customerId);
+
+        if(optionalCustomerEntity.isEmpty()) {
+            throw new InfyAirException("User does not exist");
+        }
+
+        List<BookingEntity> allByCustomerEntity = bookingRepository.findAllByCustomerEntity(optionalCustomerEntity.get());
+
+        return allByCustomerEntity.stream()
+                .map(BookingConverter::toDto)
+                .toList();
+    }
+
+    @Override
+    public BookingDTO getBookingDetailsById(Long mobile, String password, Integer customerId, Integer bookingId) throws InvalidUserException, InfyAirException {
+        customerService.checkLogin(mobile, password);
+
+        Optional<CustomerEntity> optionalCustomerEntity = customerRepository.findById(customerId);
+
+        if(optionalCustomerEntity.isEmpty()) {
+            throw new InfyAirException("User does not exist");
+        }
+
+        Optional<BookingEntity> optionalBookingEntity = bookingRepository.findByIdAndCustomerEntity(bookingId, optionalCustomerEntity.get());
+
+        if(optionalBookingEntity.isEmpty()) {
+            throw new InfyAirException("Booking does not exist");
+        }
+
+        return BookingConverter.toDto(optionalBookingEntity.get());
+
+
+    }
+
+    @Override
+    public void deleteBookingById(Long mobile, String password, Integer customerId, Integer bookingId) throws InfyAirException, InvalidUserException {
+        customerService.checkLogin(mobile, password);
+
+        Optional<CustomerEntity> optionalCustomerEntity = customerRepository.findById(customerId);
+
+        if(optionalCustomerEntity.isEmpty()) {
+            throw new InfyAirException("User does not exist");
+        }
+
+        Optional<BookingEntity> optionalBookingEntity = bookingRepository.findByIdAndCustomerEntity(bookingId, optionalCustomerEntity.get());
+
+        if(optionalBookingEntity.isEmpty()) {
+            throw new InfyAirException("Booking does not exist");
+        }
+
+        bookingRepository.deleteById(bookingId);
     }
 }
