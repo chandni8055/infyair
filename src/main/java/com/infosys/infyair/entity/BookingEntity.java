@@ -25,7 +25,7 @@ public class BookingEntity {
     private Integer numberOfSeat;
     private String pnr;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.REMOVE)
     List<PassengerEntity> passengers;
 
     public Integer getId() {

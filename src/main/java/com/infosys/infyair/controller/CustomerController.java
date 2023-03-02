@@ -1,6 +1,7 @@
 package com.infosys.infyair.controller;
 
 import com.infosys.infyair.dto.CustomerDTO;
+import com.infosys.infyair.exception.InfyAirException;
 import com.infosys.infyair.exception.InvalidUserException;
 import com.infosys.infyair.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping(value = "/register")
-    public ResponseEntity<Object> register(@RequestBody CustomerDTO customerDTO) {
+    public ResponseEntity<Object> register(@RequestBody CustomerDTO customerDTO) throws InfyAirException {
 
         customerService.register(customerDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);

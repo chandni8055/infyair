@@ -2,9 +2,11 @@ package com.infosys.infyair.service;
 
 import com.infosys.infyair.entity.CustomerEntity;
 import com.infosys.infyair.dto.CustomerDTO;
+import com.infosys.infyair.exception.InfyAirException;
 import com.infosys.infyair.exception.InvalidUserException;
 import com.infosys.infyair.repository.CustomerRepository;
 import com.infosys.infyair.utility.CustomerConverter;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +18,16 @@ public class CustomerServiceImpl implements CustomerService{
     @Autowired
     private CustomerRepository customerRepository;
     @Override
-    public Integer register(CustomerDTO customerDTO) {
+    public Integer register(CustomerDTO customerDTO) throws InfyAirException {
         CustomerEntity customerEntity = CustomerConverter.toEntity(customerDTO);
-        return customerRepository.save(customerEntity).getId();
+        CustomerEntity saveCustomer;
+        try {
+            saveCustomer = customerRepository.save(customerEntity);
+        } catch (Exception exception) {
+            throw new InfyAirException("Mobile number or Email id already exists");
+        }
+
+        return saveCustomer.getId();
     }
 
     @Override
